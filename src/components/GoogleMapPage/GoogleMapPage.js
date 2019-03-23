@@ -69,6 +69,8 @@ class googleMap extends Component {
 
       newMarker.addListener('click', () => {
         infoWindow.open(this.map, newMarker)
+        console.log(park.id)
+        this.props.dispatch({type:'FETCH_PLAYERS_AROUND_PARK', payload: park.id})
       });
     });
   }
@@ -97,7 +99,9 @@ class googleMap extends Component {
         this.setState({
           userLocation: { lat: latitude, lng: longitude },
           loading: false,
-        });
+        }, () => {
+           this.props.dispatch({ type: "UPDATE_USER_LOCATION", payload: this.state.userLocation })
+          });
       },
       (er) => {
         console.log('this is the error', er);
@@ -106,24 +110,6 @@ class googleMap extends Component {
       },
       { timeout: 10000 }
     );
-  }
-
-  getDistance = () => {
-
-    this.props.reduxState.parkReducer.map(park => {
-      const distanceMarker = {
-        position: { lat: park.latitude, lng: park.longitudes },
-        map: this.map,
-      }
-      console.log('this is the marker latitude:' + distanceMarker.position.lat);
-
-      let a = distanceMarker.position.lat - this.state.userLocation.lat
-      let b = distanceMarker.position.lng - this.state.userLocation.lng
-      let distance = Math.hypot(a, b)
-      console.log('anwser:' + distance)
-
-      return distance
-    });
   }
 
   loadScript = (url) => {
@@ -138,17 +124,22 @@ class googleMap extends Component {
   // interval = setInterval(this.getCurrentLocation, 10000)
 
   render() {
-    this.getDistance()
+
+    let userNameArray = null;
+    this.props.reduxState.userLocationReducer.map(name => {
+      return userNameArray = <li><p>{name}</p></li>
+
+    })
 
     return (
-
       <main>
-        <div>
-          <ul>
-            {}
-          </ul>
-        </div>
         <div id='map'>
+        </div>
+        <div>
+          <h2>player list goes here</h2>
+          <ul>
+            {userNameArray}
+          </ul>
         </div>
       </main>
 

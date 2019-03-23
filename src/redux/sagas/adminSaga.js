@@ -19,8 +19,7 @@ function* postPark(action) {
 
         yield put({ type: 'FETCH_PARK' })
     } catch (error) {
-        console.log('Error making POST request in admin saga', error);
-        alert('there was a problem in saga Post');
+        console.log('error making POST request in admin saga', error);
     }
 }
 
@@ -30,7 +29,7 @@ function* deletePark(action) {
 
         yield put({ type: 'FETCH_PARK' })
     } catch (error) {
-        console.log('DELETE error in admin sags', error)
+        console.log('DELETE error in admin saga', error)
     }
 }
 

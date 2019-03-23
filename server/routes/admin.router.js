@@ -6,14 +6,12 @@ router.get('/', (req, res) => {
     const queryText = 'SELECT * FROM "park";'
     pool.query(queryText)
         .then(results => {
-
-            console.log(results.rows);
-
+            
             res.send(results.rows)
         })
         .catch(error => {
 
-            console.log('SELECT item error:', error);
+            console.log('SELECT park error:', error);
 
             res.sendStatus(500);
         });
@@ -33,7 +31,7 @@ router.post('/', (req, res) => {
         })
         .catch((error) => {
 
-            console.log('INSERT item error:', error);
+            console.log('INSERT park error:', error);
 
             res.sendStatus(500)
         })
@@ -50,7 +48,7 @@ router.delete('/:id', (req, res) => {
         })
         .catch((error) => {
 
-            console.log('DELETE item error: ', error);
+            console.log('DELETE park error: ', error);
 
             res.sendStatus(500);
         });
