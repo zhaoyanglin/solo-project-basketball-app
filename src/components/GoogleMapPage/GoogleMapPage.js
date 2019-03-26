@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class googleMap extends Component {
+class GoogleMap extends Component {
 
   state = {
     userLocation: {
-      lat: 32,
-      lng: 32,
+      lat: 44.9780,
+      lng: -93.2635,
     },
     loading: true,
   };
@@ -44,14 +44,16 @@ class googleMap extends Component {
     this.userMarker = new window.google.maps.Marker({
       position: { lat: this.state.userLocation.lat, lng: this.state.userLocation.lng },
       map: this.map,
+      animation: window.google.maps.Animation.BOUNCE,
+      icon:'./icons/userIcon.png'
     });
-    this.userCircle !== null && this.userCircle.setMap(null)
-    this.userCircle = new window.google.maps.Circle({
-      map: this.map,
-      radius: 1000,    // 10 miles in metres
-      fillColor: '#AA0000'
-    });
-    this.userCircle.bindTo('center', this.userMarker, 'position');
+    // this.userCircle !== null && this.userCircle.setMap(null)
+    // this.userCircle = new window.google.maps.Circle({
+    //   map: this.map,
+    //   radius: 1000,
+    //   fillColor: '#AA0000'
+    // });
+    // this.userCircle.bindTo('center', this.userMarker, 'position');
 
     //creating the markers on the DOM, base on the Data from our data base.
     //creating the info window.
@@ -60,17 +62,20 @@ class googleMap extends Component {
       const newMarker = new window.google.maps.Marker({
         position: { lat: park.latitude, lng: park.longitudes },
         map: this.map,
+        icon: './icons/parkIcon.png'
       });
 
       let infoWindow = new window.google.maps.InfoWindow({
-        content: `<h1>${park.info_window}</h1>
-                  <img src=${park.img_url} alt='${park.info_window}' />`
+        content: `<h1>${park.park_name}</h1>
+                  <p>${park.info_window}</p>
+                  <img src=${park.img_url} alt='${park.info_window}' />
+                  `
       });
 
       newMarker.addListener('click', () => {
         infoWindow.open(this.map, newMarker)
         console.log(park.id)
-        this.props.dispatch({type:'FETCH_PLAYERS_AROUND_PARK', payload: park.id})
+        this.props.dispatch({ type: 'FETCH_PLAYERS_AROUND_PARK', payload: park.id })
       });
     });
   }
@@ -86,29 +91,30 @@ class googleMap extends Component {
           this.userMarker = new window.google.maps.Marker({
             position: { lat: latitude, lng: longitude },
             map: this.map,
+            animation: window.google.maps.Animation.BOUNCE,
+            icon: './icons/userIcon.png'
           });
-          this.userCircle !== null && this.userCircle.setMap(null)
-          this.userCircle = new window.google.maps.Circle({
-            map: this.map,
-            radius: 1000,
-            fillColor: '#AA0000'
-          });
-          this.userCircle.bindTo('center', this.userMarker, 'position');
+          // this.userCircle !== null && this.userCircle.setMap(null)
+          // this.userCircle = new window.google.maps.Circle({
+          //   map: this.map,
+          //   radius: 1000,
+          //   fillColor: '#AA0000'
+          // });
+          // this.userCircle.bindTo('center', this.userMarker, 'position');
         }
-
         this.setState({
           userLocation: { lat: latitude, lng: longitude },
           loading: false,
         }, () => {
-           this.props.dispatch({ type: "UPDATE_USER_LOCATION", payload: this.state.userLocation })
-          });
+          this.props.dispatch({ type: "UPDATE_USER_LOCATION", payload: this.state.userLocation })
+        });
       },
       (er) => {
         console.log('this is the error', er);
 
         this.setState({ loading: false });
       },
-      { timeout: 10000 }
+      { timeout: 100000 }
     );
   }
 
@@ -125,20 +131,16 @@ class googleMap extends Component {
 
   render() {
 
-    let userNameArray = null;
-    this.props.reduxState.userLocationReducer.map(name => {
-      return userNameArray = <li><p>{name}</p></li>
-
-    })
-
     return (
-      <main>
+      <main id='mainDiv'>
         <div id='map'>
         </div>
-        <div>
-          <h2>player list goes here</h2>
+        <div id='playerList'>
+          <h2>This park has this many players:</h2>
           <ul>
-            {userNameArray}
+            {this.props.reduxState.userLocationReducer.map((name,i) => {
+              return <li key={i}>{name}</li>
+            })}
           </ul>
         </div>
       </main>
@@ -151,4 +153,4 @@ const mapStateToProps = reduxState => ({
   reduxState,
 });
 
-export default connect(mapStateToProps)(googleMap);
+export default connect(mapStateToProps)(GoogleMap);

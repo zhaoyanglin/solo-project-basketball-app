@@ -1,6 +1,6 @@
 import React from 'react';
-import {Route} from 'react-router-dom'
-import {connect} from 'react-redux';
+import { Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
@@ -22,15 +22,25 @@ const ProtectedRoute = (props) => {
     component: ComponentToProtect,
     user,
     loginMode,
+    path,
     ...otherProps
   } = props;
 
   let ComponentToShow;
+  console.log('path is:-----------', path);
 
-  if(user.id) {
-    // if the user is logged in (only logged in users have ids)
-    // show the component that is protected
+
+  if ((user.id === 1 && path === '/admin') || (user.id === 1 && path === '/home')) {
     ComponentToShow = ComponentToProtect;
+  } else if (user.id) {
+    if ((user.id && path !== '/admin') && (user.id && path !== '/home')) {
+
+      // if the user is logged in (only logged in users have ids)
+      // show the component that is protected
+      ComponentToShow = ComponentToProtect;
+    } else{
+      return <Redirect exact from={path}  to="/googleMapPage" />
+    }
   } else if (loginMode === 'login') {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
@@ -40,15 +50,14 @@ const ProtectedRoute = (props) => {
     // show the RegisterPage
     ComponentToShow = RegisterPage;
   }
-
   // We return a Route component that gets added to our list of routes
   return (
-      <Route
-        // all props like 'exact' and 'path' that were passed in
-        // are now passed along to the 'Route' Component
-        {...otherProps}
-        component={ComponentToShow}
-      />
+    <Route
+      // all props like 'exact' and 'path' that were passed in
+      // are now passed along to the 'Route' Component
+      {...otherProps}
+      component={ComponentToShow}
+    />
   )
 }
 

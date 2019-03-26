@@ -43,6 +43,7 @@ function* logoutUser(action) {
       withCredentials: true,
     };
 
+    
     // the config includes credentials which
     // allow the server session to recognize the user
     // when the server recognizes the user session

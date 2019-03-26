@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
                             return deg * (Math.PI / 180)
                         };
 
-                        if (distance < 5) {
+                        if (distance < 0.402336) {
                             userAroundParks.push(user.username)
                         };
                         console.log('userAroundParks is 1 :', userAroundParks);

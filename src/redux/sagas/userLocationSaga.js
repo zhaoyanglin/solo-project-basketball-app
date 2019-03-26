@@ -22,7 +22,7 @@ function* updateUserLoaction(action) {
         
         yield axios.put('/api/userLocation', action.payload);
 
-        yield put({ type: 'FETCH_PLAYERS_AROUND_PARK' })
+        // yield put({ type: 'FETCH_PLAYERS_AROUND_PARK' })
     } catch (error) {
         console.log('error making POST request in user location saga', error);
     }

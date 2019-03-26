@@ -11,6 +11,7 @@ class Admin extends Component {
         },
         info_window: '',
         img_url:'',
+        park_name:''
     }
 
     componentDidMount() {
@@ -51,6 +52,7 @@ class Admin extends Component {
             },
             info_window: '',
             img_url:'',
+            park_name:''
         })
     }
 
@@ -65,6 +67,7 @@ class Admin extends Component {
             return (<tr key={i}>
                 <td>{data.latitude}</td>
                 <td>{data.longitudes}</td>
+                <td>{data.park_name}</td>
                 <td>{data.info_window}</td>
                 <td>{data.img_url}</td>
                 <td><button onClick={ () => this.deleteButton(data.id)}>Delete</button></td>
@@ -82,6 +85,8 @@ class Admin extends Component {
 
                     <input placeholder='longitudes' type='number' onChange={this.handleChangeforPosition('longitudes')} value={this.state.position.longitudes} />
 
+                    <input placeholder='park name' onChange={this.handleChangefor('park_name')} value={this.state.park_name} />
+
                     <input placeholder='description' onChange={this.handleChangefor('info_window')} value={this.state.info_window} />
 
                     <input placeholder='image url' onChange={this.handleChangefor('img_url')} value={this.state.img_url} />
@@ -95,6 +100,7 @@ class Admin extends Component {
                             <tr>
                                 <th>latitude</th>
                                 <th>longitudes</th>
+                                <th>park name</th>
                                 <th>description</th>
                                 <th>img_url</th>
                                 <th>Delete</th>

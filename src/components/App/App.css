@@ -49,8 +49,21 @@ input {
     cursor: pointer;
 }
 
+#mainDiv {
+    width: 100%;
+    overflow: hidden;
+    /* add this to contain floated children */
+}
+
 #map {
     height: 70vh;
+    width: 70%;
+    float: left;
+}
+
+#playerList {
+    float: left;
+    /* add this */
 }
 
 table {
