@@ -7,7 +7,7 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <h2 className="nav-title">N-B-O</h2>
     </Link>
     <div className="nav-right">
       {props.user.id === 1 && <Link className="nav-link" to="/home">

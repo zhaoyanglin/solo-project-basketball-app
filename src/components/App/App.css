@@ -52,7 +52,8 @@ input {
 #mainDiv {
     width: 100%;
     overflow: hidden;
-    /* add this to contain floated children */
+    display: flex;
+    
 }
 
 #map {

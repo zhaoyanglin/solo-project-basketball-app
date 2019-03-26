@@ -9,11 +9,14 @@ class GoogleMap extends Component {
       lng: -93.2635,
     },
     loading: true,
+    current_park:''
   };
 
   map = null;
   userMarker = null;
-  userCircle = null;
+  // userCircle = null;
+  infoWindow = null;
+
   componentDidMount() {
 
     this.props.dispatch({ type: 'FETCH_PARK' })
@@ -47,6 +50,14 @@ class GoogleMap extends Component {
       animation: window.google.maps.Animation.BOUNCE,
       icon:'./icons/userIcon.png'
     });
+    let userName = this.props.reduxState.user.username
+    let userInfoWindow = new window.google.maps.InfoWindow({
+      content: `<h1>${userName}</h1>`
+    });
+      
+    this.userMarker.addListener('click', () => {
+      userInfoWindow.open(this.map, this.userMarker)
+    });
     // this.userCircle !== null && this.userCircle.setMap(null)
     // this.userCircle = new window.google.maps.Circle({
     //   map: this.map,
@@ -65,22 +76,27 @@ class GoogleMap extends Component {
         icon: './icons/parkIcon.png'
       });
 
-      let infoWindow = new window.google.maps.InfoWindow({
-        content: `<h1>${park.park_name}</h1>
+      newMarker.addListener('click', () => {
+        if(this.infoWindow){
+          this.infoWindow.close()
+        }
+        this.infoWindow = new window.google.maps.InfoWindow({
+          content: `<h1>${park.park_name}</h1>
                   <p>${park.info_window}</p>
                   <img src=${park.img_url} alt='${park.info_window}' />
                   `
-      });
-
-      newMarker.addListener('click', () => {
-        infoWindow.open(this.map, newMarker)
+        });
+        this.infoWindow.open(this.map, newMarker)
         console.log(park.id)
+        this.setState({
+          current_park: park.park_name
+        })
         this.props.dispatch({ type: 'FETCH_PLAYERS_AROUND_PARK', payload: park.id })
       });
     });
   }
 
-  //Geolocation function, it gets my position and sets marker with a 3000 radius.
+
   getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -93,6 +109,15 @@ class GoogleMap extends Component {
             map: this.map,
             animation: window.google.maps.Animation.BOUNCE,
             icon: './icons/userIcon.png'
+          });
+
+          let userName = this.props.reduxState.user.username
+          let userInfoWindow = new window.google.maps.InfoWindow({
+            content: `<h1>${userName}</h1>`
+          });
+
+          this.userMarker.addListener('click', () => {
+            userInfoWindow.open(this.map, this.userMarker)
           });
           // this.userCircle !== null && this.userCircle.setMap(null)
           // this.userCircle = new window.google.maps.Circle({
@@ -131,12 +156,19 @@ class GoogleMap extends Component {
 
   render() {
 
+    let parkTitle = null;
+    if(this.state.current_park === '') {
+      parkTitle = 'Click on a park to view players that are currently there'
+    } else {
+      parkTitle = `These players are currently at ${ this.state.current_park }: `
+    }
+
     return (
       <main id='mainDiv'>
         <div id='map'>
         </div>
         <div id='playerList'>
-          <h2>This park has this many players:</h2>
+          <h2>{parkTitle}</h2>
           <ul>
             {this.props.reduxState.userLocationReducer.map((name,i) => {
               return <li key={i}>{name}</li>
