@@ -66,6 +66,8 @@ class GoogleMap extends Component {
     // });
     // this.userCircle.bindTo('center', this.userMarker, 'position');
 
+    //
+
     //creating the markers on the DOM, base on the Data from our data base.
     //creating the info window.
     //when marker is clicked the info window will show.  
@@ -75,7 +77,7 @@ class GoogleMap extends Component {
         map: this.map,
         icon: './icons/parkIcon.png'
       });
-
+/////////////////////////
       newMarker.addListener('click', () => {
         if(this.infoWindow){
           this.infoWindow.close()

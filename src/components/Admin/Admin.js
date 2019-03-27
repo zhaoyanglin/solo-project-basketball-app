@@ -10,8 +10,8 @@ class Admin extends Component {
             longitudes: '',
         },
         info_window: '',
-        img_url:'',
-        park_name:''
+        img_url: '',
+        park_name: ''
     }
 
     componentDidMount() {
@@ -43,7 +43,7 @@ class Admin extends Component {
         if (this.state.position.latitude === '' && this.state.position.longitudes === '') {
             alert(`latitude and longitudes and can't be empty`)
         } else {
-            this.props.dispatch({ type: 'POST_PARK', payload: this.state});
+            this.props.dispatch({ type: 'POST_PARK', payload: this.state });
         }
         this.setState({
             position: {
@@ -51,13 +51,13 @@ class Admin extends Component {
                 longitudes: '',
             },
             info_window: '',
-            img_url:'',
-            park_name:''
+            img_url: '',
+            park_name: ''
         })
     }
 
     deleteButton = (key) => {
-        this.props.dispatch({ type: 'DELETE_PARK', payload: key});
+        this.props.dispatch({ type: 'DELETE_PARK', payload: key });
     }
 
     render() {
@@ -69,40 +69,46 @@ class Admin extends Component {
                 <td>{data.longitudes}</td>
                 <td>{data.park_name}</td>
                 <td>{data.info_window}</td>
-                <td>{data.img_url}</td>
-                <td><button onClick={ () => this.deleteButton(data.id)}>Delete</button></td>
+                <td><img src={data.img_url} alt={data.park_name}/></td>
+                <td><button id='deleteButton' onClick={() => this.deleteButton(data.id)}>Delete</button></td>
             </tr >)
         });
-        
+
         return (
-            <div>
-                <header>
-                    <h1>This is the admin page</h1>
-                </header>
-                <form onSubmit={this.onSubmitButton}>
+            <div id='adminMainDiv'>
+                <div id='formDiv'>
+                    <form onSubmit={this.onSubmitButton}>
+                        <h3>Insert New Park</h3>
 
-                    <input placeholder='latitude' type='number' onChange={this.handleChangeforPosition('latitude')} value={this.state.position.latitude} />
+                        <label>Latitude</label>
+                        <input placeholder='latitude' type='number' onChange={this.handleChangeforPosition('latitude')} value={this.state.position.latitude} />
 
-                    <input placeholder='longitudes' type='number' onChange={this.handleChangeforPosition('longitudes')} value={this.state.position.longitudes} />
+                        <label>Longitude</label>
+                        <input placeholder='longitude' type='number' onChange={this.handleChangeforPosition('longitudes')} value={this.state.position.longitudes} />
 
-                    <input placeholder='park name' onChange={this.handleChangefor('park_name')} value={this.state.park_name} />
+                        <label>Park Name</label>
+                        <input placeholder='park name' onChange={this.handleChangefor('park_name')} value={this.state.park_name} />
 
-                    <input placeholder='description' onChange={this.handleChangefor('info_window')} value={this.state.info_window} />
+                        <label>Description</label>
+                        <input placeholder='description' onChange={this.handleChangefor('info_window')} value={this.state.info_window} />
 
-                    <input placeholder='image url' onChange={this.handleChangefor('img_url')} value={this.state.img_url} />
+                        <label>Image Url</label>
+                        <input placeholder='image url' onChange={this.handleChangefor('img_url')} value={this.state.img_url} />
 
-                    <button type='submit' >Submit</button>
+                        <button type='submit' id='adminSubmitButton'>Submit</button>
 
-                </form>
-                <div>
-                    <table>
+                    </form>
+                </div>
+
+                <div id='tableDiv'>
+                    <table class="table table-striped table-dark">
                         <thead>
                             <tr>
-                                <th>latitude</th>
-                                <th>longitudes</th>
-                                <th>park name</th>
-                                <th>description</th>
-                                <th>img_url</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                                <th>Park Name</th>
+                                <th>Description</th>
+                                <th>Img Url</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>

@@ -1,6 +1,9 @@
-body {
+
+
+html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background: linear-gradient(180deg, rgba(33, 37, 41, 1) 0%, rgba(33, 37, 41, 0.8673844537815126) 66%, rgba(0, 15, 31, 0.7469362745098039) 100%);
 }
 
 .alert {
@@ -9,12 +12,12 @@ body {
 }
 
 form {
-    background-color: #dbd5d5;
+    /* background-color: #dbd5d5;
     width: 30%;
     height: 250px;
     margin: 20px auto;
     padding: 25px;
-    border-radius: 2px;
+    border-radius: 2px; */
 }
 
 input {
@@ -49,42 +52,165 @@ input {
     cursor: pointer;
 }
 
+/* map page css start here */
+
 #mainDiv {
     width: 100%;
     overflow: hidden;
+    display: -webkit-flex;
     display: flex;
-    
+    margin-top: 100px;
+    padding: 30px;
+    color: white;
+    display: flex;
 }
 
 #map {
-    height: 70vh;
-    width: 70%;
+    height: 77vh;
+    flex: 75%;
     float: left;
+    color: black;
 }
 
 #playerList {
     float: left;
-    /* add this */
+    padding: 0 20px;
+    flex: 25%
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
+#playerList h2 {
+    font-size: 1.5rem;
 }
 
-th, td {
-    text-align: left;
-    padding: 8px;
+/* admin page css start here */
+
+#adminMainDiv {
+    display: flex;
+    margin-top: 100px;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2
+#adminMainDiv #formDiv {
+    flex: 30%;
 }
 
-th {
-    background-color: #4CAF50;
+/* css for the form */
+
+#adminMainDiv #formDiv form {
+    background: linear-gradient(180deg, rgba(33, 37, 41, 1) 0%, rgba(33, 37, 41, 0.8673844537815126) 66%, rgba(0, 15, 31, 0.7469362745098039) 100%);
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    box-sizing: border-box;
     color: white;
+    height: 100%;
+    position: fixed;
 }
+
+/* css for the input */
+
+#adminMainDiv #formDiv form input {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    height: 40px;
+    font-size: 18px;
+    padding-left: 13px;
+}
+
+#adminMainDiv #tableDiv {
+    flex: 70%;
+}
+
+/* css for the submit button */
+
+#adminSubmitButton {
+    background: black;
+    color: #fff;
+    border: none;
+    position: relative;
+    height: 60px;
+    font-size: 1.6em;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+    margin-top: 25px;
+}
+
+#adminSubmitButton:hover {
+    background: white;
+    color: black;
+}
+
+#adminSubmitButton:before, #adminSubmitButton:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: white;
+    transition: 400ms ease all;
+}
+
+#adminSubmitButton:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+}
+
+#adminSubmitButton:hover:before, #adminSubmitButton:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+}
+
+/* this is the css for delete button */
+
+#deleteButton {
+    background: black;
+    color: #fff;
+    border: none;
+    position: relative;
+    height: 40px;
+    font-size: 1.1em;
+    padding: 0 1em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+    margin-top: 35px;
+}
+
+#deleteButton:hover {
+    background: rgba(255, 0, 0, 0.5);
+    color: black;
+}
+
+#deleteButton:before, #deleteButton:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: red;
+    transition: 400ms ease all;
+}
+
+#deleteButton:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+}
+
+#deleteButton:hover:before, #deleteButton:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+}
+
+/* css for all image */
 
 img {
     height: 130px;
