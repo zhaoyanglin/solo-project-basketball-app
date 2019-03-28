@@ -28,13 +28,24 @@
   float: right;
 } */
 
+@import url('https://fonts.googleapis.com/css?family=Germania+One');
+h1 {
+  font-family: 'Germania One', cursive;
+  color: rgb(97, 109, 148)
+}
+
+#logo{
+  padding-top: 10px;
+  padding-left: 20px;
+  text-decoration: none;
+}
 .nav {
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(9, 13, 19, 0.6);
   position: fixed;
   width: 100%;
   z-index: 1;
-  height: 100px;
+  height: 76px;
   top: 0;
 }
 
