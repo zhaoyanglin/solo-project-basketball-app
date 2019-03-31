@@ -8,6 +8,7 @@ const LogOutButton = props => (
     // is passed to it from it's parents through React props
     className={props.className}
     onClick={() => {props.dispatch({ type: 'LOGOUT' })}}
+    href="http://localhost:3000/#/googleMapPage"
   >
     Log Out
   </a>

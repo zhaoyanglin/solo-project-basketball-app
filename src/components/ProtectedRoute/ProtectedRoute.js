@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
+// import LoginPage from '../LoginPage/LoginPage';
+// import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage_RegisterPage from '../LoginPage/newLoginPage'
 
 // A Custom Wrapper Component -- This will keep our code DRY.
@@ -31,7 +31,7 @@ const ProtectedRoute = (props) => {
   console.log('path is:-----------', path);
 
 
-  if ((user.id === 1 && path === '/admin') || (user.id === 1 && path === '/home')) {
+  if ((user.id === 1 && path === '/admin') || (user.id === 1 && path === '/googleMapPage')) {
     ComponentToShow = ComponentToProtect;
   } else if (user.id) {
     if ((user.id && path !== '/admin') && (user.id && path !== '/home')) {

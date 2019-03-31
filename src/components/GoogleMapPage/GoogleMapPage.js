@@ -52,7 +52,7 @@ class GoogleMap extends Component {
     });
     let userName = this.props.reduxState.user.username
     let userInfoWindow = new window.google.maps.InfoWindow({
-      content: `<h1>${userName}</h1>`
+      content: `<h3>${userName}</h3>`
     });
       
     this.userMarker.addListener('click', () => {
@@ -83,7 +83,7 @@ class GoogleMap extends Component {
           this.infoWindow.close()
         }
         this.infoWindow = new window.google.maps.InfoWindow({
-          content: `<h1>${park.park_name}</h1>
+          content: `<h2>${park.park_name}</h2>
                   <p>${park.info_window}</p>
                   <img src=${park.img_url} alt='${park.info_window}' />
                   `
@@ -115,7 +115,7 @@ class GoogleMap extends Component {
 
           let userName = this.props.reduxState.user.username
           let userInfoWindow = new window.google.maps.InfoWindow({
-            content: `<h1>${userName}</h1>`
+            content: `<h3>${userName}</h3>`
           });
 
           this.userMarker.addListener('click', () => {
