@@ -66,6 +66,15 @@ class Admin extends Component {
         document.getElementById('descriptionInput').value = `Let's build a court at Prime`
         document.getElementById('imageInput').value = 'https://www.creativecolorstudio.com/wp-content/uploads/2018/04/Prime-Digital-Academy-14-1920x1440.jpg'
         document.getElementById('nameInput').value = 'prime digital academy'
+        this.setState({
+            position: {
+                latitude: '44.978008',
+                longitudes: '-93.263397',
+            },
+            info_window: `Let's build a court at Prime`,
+            img_url: 'https://www.creativecolorstudio.com/wp-content/uploads/2018/04/Prime-Digital-Academy-14-1920x1440.jpg',
+            park_name: 'prime digital academy'
+        })
     }
 
     render() {
@@ -104,8 +113,9 @@ class Admin extends Component {
                         <input placeholder='image url' id='imageInput' onChange={this.handleChangefor('img_url')} value={this.state.img_url} />
 
                         <button type='submit' id='adminSubmitButton'>Submit</button>
-                        <button id='autoFill' onClick={this.autoFill}>Auto fill</button>
+                        
                     </form>
+                    <button id='autoFill' onClick={this.autoFill}>Auto fill</button>
                 </div>
 
                 <div id='tableDiv'>

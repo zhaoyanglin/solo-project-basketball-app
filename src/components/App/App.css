@@ -170,3 +170,8 @@ img {
     height: 130px;
     width: 300px;
 }
+
+#autoFill {
+    background: rgba(33, 37, 41, 0.8673844537815126);
+    border: none;
+}
