@@ -60,6 +60,23 @@ class Admin extends Component {
         this.props.dispatch({ type: 'DELETE_PARK', payload: key });
     }
 
+    autoFill = () => {
+        document.getElementById('firstInput').value = '44.978008'
+        document.getElementById('secondInput').value = '-93.263397'
+        document.getElementById('descriptionInput').value = `Let's build a court at Prime`
+        document.getElementById('imageInput').value = 'https://www.creativecolorstudio.com/wp-content/uploads/2018/04/Prime-Digital-Academy-14-1920x1440.jpg'
+        document.getElementById('nameInput').value = 'prime digital academy'
+        this.setState({
+            position: {
+                latitude: '44.978008',
+                longitudes: '-93.263397',
+            },
+            info_window: `Let's build a court at Prime`,
+            img_url: 'https://www.creativecolorstudio.com/wp-content/uploads/2018/04/Prime-Digital-Academy-14-1920x1440.jpg',
+            park_name: 'prime digital academy'
+        })
+    }
+
     render() {
 
         let parkData = null;
@@ -69,7 +86,7 @@ class Admin extends Component {
                 <td>{data.longitudes}</td>
                 <td>{data.park_name}</td>
                 <td>{data.info_window}</td>
-                <td><img src={data.img_url} alt={data.park_name}/></td>
+                <td><img src={data.img_url} alt={data.park_name} /></td>
                 <td><button id='deleteButton' onClick={() => this.deleteButton(data.id)}>Delete</button></td>
             </tr >)
         });
@@ -81,27 +98,28 @@ class Admin extends Component {
                         <h3>Insert New Park</h3>
 
                         <label>Latitude</label>
-                        <input placeholder='latitude' type='number' onChange={this.handleChangeforPosition('latitude')} value={this.state.position.latitude} />
+                        <input placeholder='latitude' id='firstInput' type='number' onChange={this.handleChangeforPosition('latitude')} value={this.state.position.latitude} />
 
                         <label>Longitude</label>
-                        <input placeholder='longitude' type='number' onChange={this.handleChangeforPosition('longitudes')} value={this.state.position.longitudes} />
+                        <input placeholder='longitude' id='secondInput' type='number' onChange={this.handleChangeforPosition('longitudes')} value={this.state.position.longitudes} />
 
                         <label>Park Name</label>
-                        <input placeholder='park name' onChange={this.handleChangefor('park_name')} value={this.state.park_name} />
+                        <input placeholder='park name' id='nameInput' onChange={this.handleChangefor('park_name')} value={this.state.park_name} />
 
                         <label>Description</label>
-                        <input placeholder='description' onChange={this.handleChangefor('info_window')} value={this.state.info_window} />
+                        <input placeholder='description' id='descriptionInput' onChange={this.handleChangefor('info_window')} value={this.state.info_window} />
 
                         <label>Image Url</label>
-                        <input placeholder='image url' onChange={this.handleChangefor('img_url')} value={this.state.img_url} />
+                        <input placeholder='image url' id='imageInput' onChange={this.handleChangefor('img_url')} value={this.state.img_url} />
 
                         <button type='submit' id='adminSubmitButton'>Submit</button>
-
+                        
                     </form>
+                    <button id='autoFill' onClick={this.autoFill}>Auto fill</button>
                 </div>
 
                 <div id='tableDiv'>
-                    <table class="table table-striped table-dark">
+                    <table className="table table-striped table-dark">
                         <thead>
                             <tr>
                                 <th>Latitude</th>

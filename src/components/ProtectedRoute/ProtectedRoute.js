@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
+// import LoginPage from '../LoginPage/LoginPage';
+// import RegisterPage from '../RegisterPage/RegisterPage';
+import LoginPage_RegisterPage from '../LoginPage/newLoginPage'
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -30,7 +31,7 @@ const ProtectedRoute = (props) => {
   console.log('path is:-----------', path);
 
 
-  if ((user.id === 1 && path === '/admin') || (user.id === 1 && path === '/home')) {
+  if ((user.id === 1 && path === '/admin') || (user.id === 1 && path === '/googleMapPage')) {
     ComponentToShow = ComponentToProtect;
   } else if (user.id) {
     if ((user.id && path !== '/admin') && (user.id && path !== '/home')) {
@@ -44,12 +45,13 @@ const ProtectedRoute = (props) => {
   } else if (loginMode === 'login') {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
-    ComponentToShow = LoginPage;
-  } else {
-    // the the user is not logged in and the mode is not 'login'
-    // show the RegisterPage
-    ComponentToShow = RegisterPage;
-  }
+    ComponentToShow = LoginPage_RegisterPage;
+  } 
+  // else {
+  //   // the the user is not logged in and the mode is not 'login'
+  //   // show the RegisterPage
+  //   ComponentToShow = RegisterPage;
+  // }
   // We return a Route component that gets added to our list of routes
   return (
     <Route
